@@ -12,6 +12,10 @@ function computerPlay() {
 
 function playerPlay() {
     let option=prompt("choose between rock , paper or scissors");
+    if (option==null||option==undefined) {
+        console.log("invalid option, try again");
+        return
+    }
     if (option.toLowerCase()!="rock"&&option.toLowerCase()!="paper"&&option.toLowerCase()!="scissors") {
         console.log("invalid option, try again");
         return
@@ -39,6 +43,28 @@ function playRound(playerOption, computerOption) {
     return (result) 
 }
 
-let playerOption=playerPlay();
-let computerOption=computerPlay();
-console.log(playRound(playerOption, computerOption));
+function game() {
+    let computerScore=0;
+    let playerScore=0;
+    let result;
+    for (let i = 0; i < 5; i++) {
+        playerOption=playerPlay();
+        computerOption=computerPlay();
+        result = playRound(playerOption, computerOption)
+        console.log(result);
+        if (result.charAt(0)=="c") {
+            computerScore++;
+        } else if (result.charAt(0)=="p") {
+            playerScore++;
+        }
+     }
+     if (computerScore>playerScore) {
+         return (`player wins with a score of ${playerScore} versus the computer which had a score of ${computerScore}`)
+     } else if (computerScore<playerScore) {
+         return (`player wins with a score of ${playerScore} versus the computer which had a score of ${computerScore}`)
+     } else {
+         return ("tie")
+     }
+}
+
+console.log(game())
